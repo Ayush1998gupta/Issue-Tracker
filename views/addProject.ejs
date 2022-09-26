@@ -1,0 +1,21 @@
+<%- include('includes/header.ejs') %> 
+  </head>
+  <body>
+    <%- include('includes/navigation.ejs') %>
+    <main>
+      <h1>Add Project</h1>
+      <form action="/addProject" method="post">
+        <label for="projectName">Project Name</label>
+        <input type="text" name="projectName" id="projectName">
+
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description">
+
+        <label for="authorName">Author Name</label>
+        <input type="text" name="authorName" id="authorName">
+
+        <button type="submit">Add New Project</button>
+      </form>
+    </main>
+  </body>
+</html>
