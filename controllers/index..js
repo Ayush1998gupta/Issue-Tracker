@@ -42,3 +42,17 @@ exports.postAddProject = (req, res, next) => {
       console.log(err);
     });
 };
+
+
+exports.getProject = (req, res, next) => {
+  const projId = req.params.projectId;
+  Project.findById(projId)
+    .then((project) => {
+      res.render('projectDetail', {
+        pageTitle: project.title,
+        project: project,
+        // path: '/products',
+      });
+    })
+    .catch((err) => console.log(err));
+};

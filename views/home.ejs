@@ -5,7 +5,8 @@
     <%- include('includes/navigation.ejs') %>
       <% if(proje.length>0){ %>
         <% for (let project of proje) { %>
-            <h1><%= project.projectName %> </h1>
+          <a href="#"> <h1><%= project.projectName %> </h1></a>
+           <a href="/projects/<%= project.id %>" class="btn">Details</a>
             <p><%= project.description %>  </p>
             <p><%= project.authorName %> </p>
         <% } %>
