@@ -12,7 +12,9 @@ router.post('/addProject', indexController.postAddProject);
 
 router.get('/about', indexController.getAbout);
 
-router.get('/projects/:projectId', indexController.getProject);
+router.get('/projectDetail/:projectId', indexController.getProject);
+
+router.get('/addIssue/:projectId',indexController.getIssue);
 
 
 module.exports = router;

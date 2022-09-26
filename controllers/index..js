@@ -4,7 +4,7 @@ exports.getHome = (req, res, next) => {
   Project.find()
     .then((projects) => {
       res.render('home', {
-        proje:projects,
+        proje: projects,
         pageTitle: 'Home',
       });
     })
@@ -23,6 +23,8 @@ exports.getAbout = (req, res, next) => {
     pageTitle: 'About',
   });
 };
+
+
 exports.postAddProject = (req, res, next) => {
   const projectName = req.body.projectName;
   const description = req.body.description;
@@ -43,16 +45,25 @@ exports.postAddProject = (req, res, next) => {
     });
 };
 
-
 exports.getProject = (req, res, next) => {
   const projId = req.params.projectId;
   Project.findById(projId)
     .then((project) => {
       res.render('projectDetail', {
-        pageTitle: project.title,
+        pageTitle: 'Project Detail',
         project: project,
         // path: '/products',
       });
     })
     .catch((err) => console.log(err));
+};
+
+exports.getIssue = (req, res, next) => {
+  const projId = req.params.projectId;
+  Project.findById(projId).then((project) => {
+    res.render('addIssue', {
+      pageTitle: 'Add Issue',
+      project: project,
+    });
+  });
 };

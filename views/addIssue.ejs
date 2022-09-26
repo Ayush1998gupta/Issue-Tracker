@@ -1,0 +1,26 @@
+<%- include('includes/header.ejs') %>
+  </head>
+
+  <body>
+    <%- include('includes/navigation.ejs') %>
+     <h1>Add issue</h1>
+      <h1><%= project.projectName %></h1>
+      <form action="/addIssue" method="post">
+
+        <label for="issue">Project Name</label>
+        <input type="text" name="issue" id="issue">
+
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description">
+
+        <label for="lable">Description</label>
+        <input type="text" name="lable" id="lable">
+
+        <label for="authorName">Author Name</label>
+        <input type="text" name="authorName" id="authorName">
+
+        <button type="submit">Add New Issue</button>
+      </form>
+  </body>
+
+  </html>
