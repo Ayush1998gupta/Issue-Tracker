@@ -16,5 +16,6 @@ router.get('/projectDetail/:projectId', indexController.getProject);
 
 router.get('/addIssue/:projectId',indexController.getIssue);
 
+router.post('/addIssue', indexController.postIssue);
 
 module.exports = router;
