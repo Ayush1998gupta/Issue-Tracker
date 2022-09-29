@@ -4,7 +4,18 @@
   <body>
     <%- include('includes/navigation.ejs') %>
       <h1><%= project.projectName %></h1>
-      <a href="/addIssue/<%= project.id %>">Add Issue</a>
+      <a href="/addIssue/<%= project.id %> ">Add Issue</a>
+
+       <% if(project.issues.length>0){ %>
+        <% for (let issue of project.issues) { %>
+            <h1><%= issue.issue %></h1>
+            <p><%= issue.description %>  </p>
+            <p><%= issue.description %>  </p>
+            <p><%= issue.authorName %> </p>
+        <% } %>
+      <% } else { %>
+           <h1>No Issue Found!</h1>
+      <% } %>
   </body>
 
   </html>

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const indexController = require('../controllers/index..js');
+const indexController = require('../controllers/index.js');
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ router.get('/about', indexController.getAbout);
 
 router.get('/projectDetail/:projectId', indexController.getProject);
 
-router.get('/addIssue/:projectId',indexController.getIssue);
+router.get('/addIssue/:projectId', indexController.getIssue);
 
-router.post('/addIssue', indexController.postIssue);
+router.post('/addIssue/:projectId', indexController.postIssue);
 
 module.exports = router;

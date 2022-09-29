@@ -1,5 +1,4 @@
 const Project = require('../models/project');
-const Issue = require('../models/issue');
 
 exports.getHome = (req, res, next) => {
   Project.find()
@@ -52,7 +51,6 @@ exports.getProject = (req, res, next) => {
       res.render('projectDetail', {
         pageTitle: 'Project Detail',
         project: project,
-        // path: '/products',
       });
     })
     .catch((err) => console.log(err));
@@ -69,25 +67,29 @@ exports.getIssue = (req, res, next) => {
 };
 
 exports.postIssue = (req, res, next) => {
-  const projId = req.body.projectId;
-  const issue = req.body.issue;
-  const description = req.body.description;
-  const authorName = req.body.authorName;
-  const lable = req.body.lable;
-  const newIssue = new Issue({
-    issue: issue,
-    lable: lable,
-    description: description,
-    authorName: authorName,
-    projectId: projId,
-  });
-  newIssue
-    .save()
-    .then(() => {
-      res.redirect('/');
-      //how to redirect to productDetail page
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const projId = req.params.projectId;
+  const issues = {
+    issue: req.body.issue,
+    description: req.body.description,
+    authorName: req.body.authorName,
+    lable: req.body.lable,
+  };
+  Project.findByIdAndUpdate(
+    projId,
+    { $push: { issues: issues } },
+    (err, docs) => {
+      if (err) {
+        console.log('error fom ', err);
+      } else {
+        Project.findById(projId)
+          .then((project) => {
+            res.render('projectDetail', {
+              pageTitle: 'Project Detail',
+              project: project,
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+    }
+  );
 };
