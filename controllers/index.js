@@ -7,6 +7,7 @@ exports.getHome = (req, res, next) => {
       res.render('home', {
         proje: projects,
         pageTitle: 'Home',
+        detailPage: false,
       });
     })
     .catch((err) => {
@@ -17,13 +18,10 @@ exports.getHome = (req, res, next) => {
 exports.getAddProject = (req, res, next) => {
   res.render('addProject', {
     pageTitle: 'Add Project',
+    detailPage: false,
   });
 };
-exports.getAbout = (req, res, next) => {
-  res.render('about', {
-    pageTitle: 'About',
-  });
-};
+
 
 exports.postAddProject = (req, res, next) => {
   const projectName = req.body.projectName;
@@ -34,6 +32,7 @@ exports.postAddProject = (req, res, next) => {
     projectName: projectName,
     description: description,
     authorName: authorName,
+    detailPage: false,
   });
   project
     .save()
@@ -53,6 +52,7 @@ exports.getProject = (req, res, next) => {
         pageTitle: 'Project Detail',
         project: project,
         issues: project.issues,
+        detailPage: true,
       });
     })
     .catch((err) => console.log(err));
@@ -64,6 +64,7 @@ exports.getIssue = (req, res, next) => {
     res.render('addIssue', {
       pageTitle: 'Add Issue',
       project: project,
+      detailPage: true,
     });
   });
 };
@@ -89,6 +90,7 @@ exports.postIssue = (req, res, next) => {
               pageTitle: 'Project Detail',
               project: project,
               issues: project.issues,
+              detailPage: true,
             });
           })
           .catch((err) => console.log(err));
@@ -110,6 +112,7 @@ exports.postSearch = (req, res, next) => {
           pageTitle: 'Project Detail',
           project: project,
           issues: issues,
+          detailPage: true,
         });
       })
       .catch((err) => console.log(err));
@@ -128,6 +131,7 @@ exports.postSearch = (req, res, next) => {
           pageTitle: 'Project Detail',
           project: project,
           issues: searched,
+          detailPage: true,
         });
       })
       .catch((err) => console.log(err));

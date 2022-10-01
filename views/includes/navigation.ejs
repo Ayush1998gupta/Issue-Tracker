@@ -3,13 +3,16 @@
     <a class="navbar-brand" href="/">
       <i class="fa-solid fa-bug"> </i> ISSUE TRACKER</a>
 
-    <a href="/addProject">
-      <button type="button" class="btn btn-secondary">Add Project</button>
-    </a>
 
-   
+    <% if( !detailPage ) {%>
+      <a href="/addProject">
+        <button type="button" class="btn btn-secondary">Add Project</button>
+      </a>
+      <% } else{%>
+        <a href="/addIssue/<%= project.id %> ">
+          <button type="button" class="btn btn-info">Add Issue</button>
+        </a>
+        <% } %> 
 
-    <!-- <a class="navbar-brand" href="/">Home</a>
-    <a class="navbar-brand" href="/addProject">Create Project</a> -->
   </div>
 </nav>

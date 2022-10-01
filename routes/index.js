@@ -10,7 +10,7 @@ router.get('/addProject', indexController.getAddProject);
 
 router.post('/addProject', indexController.postAddProject);
 
-router.get('/about', indexController.getAbout);
+
 
 router.get('/projectDetail/:projectId', indexController.getProject);
 

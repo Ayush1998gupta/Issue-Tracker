@@ -8,36 +8,41 @@
       </h1>
 
       <div class="filter">
-        <a href="/addIssue/<%= project.id %> ">
-          <button type="button" class="btn btn-info">Add Issue</button>
-        </a>
 
-        <form action="/projectDetail/<%= project.id %>" method="post">
-          <div class="mb-3">
-            <select name="lable" id="lable" class="form-select form-select-lg mb-3"
-              aria-label=".form-select-lg example">
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-              <option value="Critical">Critical</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary mb-3">Search</button>
-          </form>
 
-        <form action="/projectDetail/<%= project.id %>" method="post">
-          <div class="input-group mb-3">
-            <label class="form-label" for="search">Search</label>
-            <input type="text" class="form-control" placeholder="search bt title and description"
-              aria-label="Recipient's username" aria-describedby="button-addon2"  name="search" id="search">
-            <div class="col-auto">
-              <button type="submit" class="btn btn-primary mb-3">Search</button>
-            </div>
+
+        <div class="row g-3">
+          <div class="col">
+            <form action="/projectDetail/<%= project.id %>" method="post">
+              <div class="mb-3">
+                <label class="form-label" for="lable">Lable</label>
+                <select name="lable" id="lable" class="form-select form-select-lg mb-3"
+                  aria-label=".form-select-lg example">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+              </div>
+            </form>
           </div>
-        </form>
+
+
+          <div class="col">
+            <form action="/projectDetail/<%= project.id %>" method="post">
+              <div class="mb-3">
+                <label class="form-label" for="search">Search</label>
+                <input class="form-control" type="text" name="search" id="search">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+         <a href="/projectDetail/<%= project.id %>" class="btn btn-primary">Reset</a>
 
       </div>
-
       <div class="issueCard">
         <% if(issues.length>0){ %>
           <% for (let issue of issues) { %>
@@ -49,9 +54,30 @@
                 <p class="card-text">
                   <%= issue.description %>
                 </p>
-                <a href="#" class="btn btn-primary">
-                  <%= issue.lable %>
-                </a>
+
+                <% if( issue.lable==='high' ) {%>
+                  <a href="#" class="btn btn-warning">
+                    <%= issue.lable %>
+                  </a>
+                  <% } %>
+
+                    <% if( issue.lable==='medium' ) {%>
+                      <a href="#" class="btn btn-info">
+                        <%= issue.lable %>
+                      </a>
+                      <% } %>
+                        <% if( issue.lable==='low' ) {%>
+                          <a href="#" class="btn btn-secondary">
+                            <%= issue.lable %>
+                          </a>
+                          <% } %>
+                            <% if( issue.lable==='critical' ) {%>
+                              <a href="#" class="btn btn-danger">
+                                <%= issue.lable %>
+                              </a>
+                              <% } %>
+
+
               </div>
               <div class="card-footer text-muted">
                 <%= issue.authorName %>
