@@ -3,27 +3,52 @@
 
   <body>
     <%- include('includes/navigation.ejs') %>
-     <h1>Add issue</h1>
-      <h1><%= project.projectName %></h1>
-      
-      <form action="/addIssue/<%= project.id %>" method="post">
 
-        <label for="issue">Issue</label>
-        <input type="text" name="issue" id="issue">
+      <main class="addProjectForm">
+        <h1 class="heading">Add Issue to <%= project.projectName %>
+        </h1>
 
-        <label for="description">Description</label>
-        <input type="text" name="description" id="description">
 
-        <label for="lable">Lable</label>
-        <input type="text" name="lable" id="lable">
+        <form action="/addIssue/<%= project.id %>" method="post">
+          <div class="mb-3">
+            <label class="form-label" for="issue">Issue</label>
+            <input class="form-control" type="text" name="issue" id="issue">
+          </div>
 
-        <label for="authorName">Author Name</label>
-        <input type="text" name="authorName" id="authorName">
+          
+          <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea class="form-control" type="text" name="description" id="description" rows="3"></textarea>
+          </div>
 
-        <input type="hidden" name="projectId" value="<%= project.id %> ">
-        
-        <button type="submit">Add New Issue</button>
-      </form>
+          <div class="mb-3">
+            <label class="form-label" for="lable">Lable</label>
+            <!-- <input class="form-control" type="text" name="lable" id="lable"> -->
+            <select name="lable" id="lable" class="form-select form-select-lg mb-3"
+              aria-label=".form-select-lg example">
+              <option selected>Select</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label" for="authorName">Author Name</label>
+            <input class="form-control" type="text" name="authorName" id="authorName">
+          </div>
+
+          <input type="hidden" name="projectId" value="<%= project.id %> ">
+
+
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Add New Issue</button>
+          </div>
+
+        </form>
+      </main>
   </body>
 
   </html>

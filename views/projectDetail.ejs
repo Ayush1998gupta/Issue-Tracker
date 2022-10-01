@@ -3,19 +3,66 @@
 
   <body>
     <%- include('includes/navigation.ejs') %>
-      <h1><%= project.projectName %></h1>
-      <a href="/addIssue/<%= project.id %> ">Add Issue</a>
+      <h1 class="heading">
+        <%= project.projectName %>
+      </h1>
 
-       <% if(project.issues.length>0){ %>
-        <% for (let issue of project.issues) { %>
-            <h1><%= issue.issue %></h1>
-            <p><%= issue.description %>  </p>
-            <p><%= issue.description %>  </p>
-            <p><%= issue.authorName %> </p>
-        <% } %>
-      <% } else { %>
-           <h1>No Issue Found!</h1>
-      <% } %>
+      <div class="filter">
+        <a href="/addIssue/<%= project.id %> ">
+          <button type="button" class="btn btn-info">Add Issue</button>
+        </a>
+
+        <form action="/projectDetail/<%= project.id %>" method="post">
+          <div class="mb-3">
+            <select name="lable" id="lable" class="form-select form-select-lg mb-3"
+              aria-label=".form-select-lg example">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary mb-3">Search</button>
+          </form>
+
+        <form action="/projectDetail/<%= project.id %>" method="post">
+          <div class="input-group mb-3">
+            <label class="form-label" for="search">Search</label>
+            <input type="text" class="form-control" placeholder="search bt title and description"
+              aria-label="Recipient's username" aria-describedby="button-addon2"  name="search" id="search">
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+      <div class="issueCard">
+        <% if(issues.length>0){ %>
+          <% for (let issue of issues) { %>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-header" style="font-size: 2rem;">
+                  <%= issue.issue %>
+                </h5>
+                <p class="card-text">
+                  <%= issue.description %>
+                </p>
+                <a href="#" class="btn btn-primary">
+                  <%= issue.lable %>
+                </a>
+              </div>
+              <div class="card-footer text-muted">
+                <%= issue.authorName %>
+              </div>
+            </div>
+            <% } %>
+              <% } else { %>
+                <h1 class="nothingFound">No Issue Found!</h1>
+                <% } %>
+
+      </div>
   </body>
 
   </html>

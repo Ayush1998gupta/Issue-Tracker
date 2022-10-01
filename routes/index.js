@@ -18,4 +18,6 @@ router.get('/addIssue/:projectId', indexController.getIssue);
 
 router.post('/addIssue/:projectId', indexController.postIssue);
 
+router.post('/projectDetail/:projectId', indexController.postSearch);
+
 module.exports = router;

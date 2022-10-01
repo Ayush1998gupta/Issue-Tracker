@@ -1,4 +1,5 @@
 const Project = require('../models/project');
+// const Issues = require('../models/project');
 
 exports.getHome = (req, res, next) => {
   Project.find()
@@ -51,6 +52,7 @@ exports.getProject = (req, res, next) => {
       res.render('projectDetail', {
         pageTitle: 'Project Detail',
         project: project,
+        issues: project.issues,
       });
     })
     .catch((err) => console.log(err));
@@ -79,17 +81,55 @@ exports.postIssue = (req, res, next) => {
     { $push: { issues: issues } },
     (err, docs) => {
       if (err) {
-        console.log('error fom ', err);
+        console.log(err);
       } else {
         Project.findById(projId)
           .then((project) => {
             res.render('projectDetail', {
               pageTitle: 'Project Detail',
               project: project,
+              issues: project.issues,
             });
           })
           .catch((err) => console.log(err));
       }
     }
   );
+};
+
+exports.postSearch = (req, res, next) => {
+  const projId = req.params.projectId;
+  const lable = req.body.lable;
+  const search = req.body.search;
+  if (lable) {
+    Project.findById(projId)
+      .then((project) => {
+        let issues = project.issues;
+        issues = project.issues.filter((issues) => issues.lable === lable);
+        res.render('projectDetail', {
+          pageTitle: 'Project Detail',
+          project: project,
+          issues: issues,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+  if (search) {
+    Project.findById(projId)
+      .then((project) => {
+        let searched = project.issues;
+        searched = project.issues.filter(
+          (allsearched) =>
+            allsearched.authorName === search.toLowerCase() ||
+            allsearched.issue === search.toLowerCase() ||
+            allsearched.description === search.toLowerCase()
+        );
+        res.render('projectDetail', {
+          pageTitle: 'Project Detail',
+          project: project,
+          issues: searched,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
 };

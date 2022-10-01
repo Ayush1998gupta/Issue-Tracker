@@ -3,15 +3,27 @@
 
   <body>
     <%- include('includes/navigation.ejs') %>
-      <% if(proje.length>0){ %>
-        <% for (let project of proje) { %>
-          <a href="/projectDetail/<%= project.id %>" > <h1><%= project.projectName %> </h1></a>
-            <p><%= project.description %>  </p>
-            <p><%= project.authorName %> </p>
-        <% } %>
-      <% } else { %>
-           <h1>No Project Found!</h1>
-      <% } %>
+
+      <h1 class="heading">All Projects</h1>
+      <div class="projectCard">
+        <% if(proje.length>0){ %>
+          <% for (let project of proje) { %>
+            <div class="card">
+              <div class="card-header">
+                <%= project.projectName %>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <%= project.description %>
+                </p>
+                <a href="/projectDetail/<%= project.id %>" class="btn btn-primary">Details</a>
+              </div>
+            </div>
+            <% } %>
+              <% } else { %>
+                <h1 class="nothingFound">No Project Found!</h1>
+                <% } %>
+      </div>
   </body>
 
   </html>
